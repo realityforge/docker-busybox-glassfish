@@ -7,5 +7,5 @@ The image bundles version 4.1.151 of Payara variant of glassfish.
 
 Example: 
 
-    docker run -it --rm realityforge/busybox-java:latest
+    docker run -it --rm realityforge/busybox-glassfish:latest
 
