@@ -5,13 +5,10 @@ ENV GLASSFISH_BASE_DIR /opt/glassfish
 ENV GLASSFISH_DOMAINS_DIR /srv/glassfish/domains
 ENV OPENMQ_INSTANCES_DIR /srv/openmq/instances
 
-RUN opkg-install shadow-groupadd shadow-useradd
-RUN useradd -d /srv/glassfish -M --comment "GlassFish User"  glassfish
-
-# Curl is installed in the base image so let's use it
-RUN curl -jksSL http://s3-eu-west-1.amazonaws.com/payara.co/Payara+Downloads/payara-4.1.151.zip > /tmp/payara-4.1.151.zip
-
-RUN unzip -o -q /tmp/payara-4.1.151.zip -d /opt && \
+RUN opkg-install shadow-groupadd shadow-useradd && \
+    useradd -d /srv/glassfish -M --comment "GlassFish User"  glassfish && \
+    curl -jksSL http://s3-eu-west-1.amazonaws.com/payara.co/Payara+Downloads/payara-4.1.151.zip > /tmp/payara-4.1.151.zip && \
+    unzip -o -q /tmp/payara-4.1.151.zip -d /opt && \
     mv /opt/payara41 ${GLASSFISH_BASE_DIR} && \
     rm /tmp/payara-4.1.151.zip && \
     mkdir -p ${GLASSFISH_DOMAINS_DIR} ${OPENMQ_INSTANCES_DIR} && \
